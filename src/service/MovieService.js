@@ -4,7 +4,7 @@ import Movie from '../models/Movie'
 class MovieFetcherService {
 
     fetchMovies() {
-        return api.get().then((response) =>{
+        return api.get('/shows').then((response) =>{
             const responseObj = response.data;
             console.log(responseObj);
             return responseObj.map(movie => new Movie(movie)).splice(0, 50);
@@ -12,7 +12,7 @@ class MovieFetcherService {
     }
 
     fetchMovieInfo(id) {
-        return api.get('/$' + id).then((response) =>{
+        return api.get('/shows/{id}').then((response) =>{
             const responseObj = response.data;
             console.log(responseObj);
             return new Movie(responseObj);

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { BoxLoading } from 'react-loadingg';
 import 'materialize-css';
 
 import MovieFetcherService from '../../service/MovieService'
 
 function DetailsGrid(props) {
-    const [movie, setMovie] = useState();
+    const [movie, setMovie] = useState(null);
 
-    useEffect(async () => {
-        const movieInfo = await MovieFetcherService.fetchMovieInfo(props.id);
-        setMovie(movieInfo);
-      });
+    useEffect(() => {
+        (async ()=>{
+            const movieInfo = await MovieFetcherService.fetchMovieInfo(props.id);
+            setMovie(movieInfo);
+        })()
+    },[]);
+    
+    if(movie === null) return (<BoxLoading/>);
 
     return (
         <div class="row">

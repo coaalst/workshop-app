@@ -1,45 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BoxLoading } from 'react-loadingg';
 import 'materialize-css';
 
 import MovieCard from './MovieCard'
 import MovieFetcherService from '../../service/MovieService'
 import { Link } from 'react-router-dom'
 
-class LandingGrid extends React.Component {
+function LandingGrid() {
+    const [movies, setMovies] = useState([]);
 
-    constructor() {
-        super();
-        this.state = {
-            movies: []
-           };
-      }
-
-    async componentDidMount() {
-        try {
+    useEffect(() => {
+        (async ()=>{
             const movieList = await MovieFetcherService.fetchMovies()
-            this.setState({movies: movieList})
-        } catch (error) {
-            throw new Error(error.message)
-        }
-    }
-    
-    render(){
-        const returnedArray = Array.from(this.state.movies)
-        const movieGrid = returnedArray.map((movie, index) => (
-            <Link to={`/movie/${movie.id}`} key={index}>
-                <MovieCard show={movie} />
-            </Link>
-        ))
-        return (
-            <body>
-                <div class="container ">
-                    <div className="row">{movieGrid}</div>
-                </div>
-            </body>
-        );
-    }
-    
+            setMovies(movieList)
+        })()
+    },[]);
+
+    const returnedArray = Array.from(movies)
+    const movieGrid = returnedArray.map((movie, index) => (
+        <Link to={`/movie/${movie.id}`} key={index}>
+            <MovieCard show={movie} />
+        </Link>
+    ))
+    if(movies === []) return (<BoxLoading/>);
+    return (
+        <body>
+            <div class="container ">
+                <div className="row">{movieGrid}</div>
+            </div>
+        </body>
+    );
 }
 
 export default LandingGrid;
-        

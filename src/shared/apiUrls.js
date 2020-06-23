@@ -1,1 +1,1 @@
-export const SHOW_LIST_URL = 'https://api.tvmaze.com/shows'
+export const SHOW_LIST_URL = 'https://api.tvmaze.com'

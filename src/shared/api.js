@@ -4,5 +4,8 @@ import axios from "axios";
 
 export default axios.create({
   baseURL: SHOW_LIST_URL,
-  responseType: "json"
+  responseType: "json",
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 });
