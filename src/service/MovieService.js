@@ -12,8 +12,7 @@ class MovieFetcherService {
     }
 
     fetchMovieInfo(id) {
-        const requestModifier = '/' + id;
-        return api.get(requestModifier).then((response) =>{
+        return api.get('/$' + id).then((response) =>{
             const responseObj = response.data;
             console.log(responseObj);
             return new Movie(responseObj);
