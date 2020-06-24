@@ -22,14 +22,18 @@ function LandingGrid() {
             <MovieCard show={movie} />
         </Link>
     ))
-    if(movies === []) return (<BoxLoading/>);
-    return (
-        <body>
-            <div class="container ">
-                <div className="row">{movieGrid}</div>
-            </div>
-        </body>
-    );
+
+    if(movies.length === 0) return (<BoxLoading/>);
+
+    else {
+        return (
+            <body>
+                <div class="container ">
+                    <div className="row">{movieGrid}</div>
+                </div>
+            </body>
+        );
+    }
 }
 
 export default LandingGrid;
